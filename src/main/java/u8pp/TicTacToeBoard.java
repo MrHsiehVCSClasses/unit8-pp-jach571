@@ -32,18 +32,97 @@ public class TicTacToeBoard {
         return hasDiagonalWin() || hasHorizontalWin() || hasVerticalWin();
     }
 
-    public boolean hasHorizontalWin() {
-        /* Your code here */
+    /**
+     * 
+     * @return : Returns a boolean. Returns the true if the board has a win in a horizontal pattern and returns false otherwise.
+     */
+    public boolean hasHorizontalWin(){
+        int score = 0;
+        boolean result = false;
+
+        for (int row = 0; row < this.data.length; row++){
+            for (int col = 0; col < this.data[0].length; col++){
+                if(this.data[row][col].equals("X")){
+                    score += 1;
+                } else if(this.data[row][col].equals("O")){
+                    score -= 1;
+                } else{
+                    score += 0;
+                }
+
+                if(score == this.data.length || score == (this.data.length * -1)){
+                    result = true;
+                }
+            }
+            score = 0;
+        }
+        return result;
     }
 
-    public boolean hasVerticalWin() {
-        /* Your code here */
+    /**
+     * 
+     * @return : Returns a boolean. Returns the true if the board has a win in a vertical pattern and returns false otherwise.
+     */
+    public boolean hasVerticalWin(){
+        int score = 0;
+        boolean result = false;
+
+        for (int col = 0; col < this.data[0].length; col++){
+            for (int row = 0; row < this.data.length; row++){
+                if(this.data[row][col].equals("X")){
+                    score += 1;
+                } else if(this.data[row][col].equals("O")){
+                    score -= 1;
+                } else{
+                    score += 0;
+                }
+
+                if(score == this.data.length || score == (this.data.length * -1)){
+                    result = true;
+                }
+            }
+            score = 0;
+        }
+        return result;
     }
 
-    public boolean hasDiagonalWin() {
-        /* Your code here */
-    }
+    /**
+     * 
+     * @return : Returns a boolean. Returns the true if the board has a win in a diagonal pattern and returns false otherwise.
+     */
+    public boolean hasDiagonalWin(){
+        int score = 0;
 
-    /* helper functions go here */
-   
+        //for loop to check in the normal diagonal pattern
+        for (int pos = 0; pos < this.data.length; pos++){
+            if(this.data[pos][pos].equals("X")){
+                score += 1;
+            } else if(this.data[pos][pos].equals("O")){
+                score -= 1;
+            } else{
+                score += 0;
+            }
+
+            if(score == this.data.length || score == (this.data.length * -1)){
+                return true;
+            }   
+        }
+        score = 0; 
+
+        //for loop to check in the reverse diagonal pattern
+        for (int pos = 0; pos < this.data.length; pos++){
+            if(this.data[pos][this.data.length - pos - 1].equals("X")){
+                score += 1;
+            } else if(this.data[pos][this.data.length - pos - 1].equals("O")){
+                score -= 1;
+            } else{
+                score += 0;
+            }
+
+            if(score == this.data.length || score == (this.data.length * -1)){
+                return true;
+            }   
+        }
+        return false;    
+    }
 }
